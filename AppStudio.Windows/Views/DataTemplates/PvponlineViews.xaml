@@ -1,0 +1,111 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:AppStudio.Controls"
+    xmlns:html2xaml="using:AppStudio.Controls.Html2Xaml"
+    xmlns:commands="using:AppStudio.Commands">
+
+    <!-- ListPhotoLeft -->
+    <DataTemplate x:Key="PvponlineList">
+        <Grid MinWidth="480">
+            <GridView ItemsSource="{Binding PreviewItems}" SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"  commands:ItemClickCommand.Command="{Binding ItemClickCommand}"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                     ItemTemplate="{StaticResource PvponlineItem}">
+            </GridView>
+            <ProgressBar Height="40" Foreground="White" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding ProgressBarVisibility}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PvponlineListSnapped">
+        <Grid Width="230">
+            <GridView ItemsSource="{Binding PreviewItems}" SelectedItem="{Binding NavigationItem, Mode=TwoWay}"
+                     SelectionMode="Single" IsSwipeEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                     ItemTemplate="{StaticResource PvponlineItemSnapped}">
+            </GridView>
+            <ProgressBar Height="40" Foreground="White" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding ProgressBarVisibility}" />
+        </Grid>
+    </DataTemplate>
+
+    <!-- ListPhotoLeft Item -->
+    <DataTemplate x:Key="PvponlineItem">
+        <Grid Width="480" Height="210">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="160"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Margin="0, 0, 10, 0" Style="{StaticResource ItemHeaderWrapText}"
+                       MaxHeight="50" VerticalAlignment="Center" Text="{Binding Title, Converter={StaticResource TextPlainConverter}, ConverterParameter=140}" />
+            <Image Grid.Row="1" Grid.Column="0" Margin="0, 8" Source="{Binding ImageUrl, Converter={StaticResource ThumbnailConverter}, ConverterParameter=220}"
+                   MaxHeight="110" Stretch="UniformToFill" VerticalAlignment="Top" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Margin="16, 8, 20, 10" Style="{StaticResource ItemSubheaderText}"
+                       MaxHeight="110" VerticalAlignment="Top" Text="{Binding Summary, Converter={StaticResource TextPlainConverter}, ConverterParameter=280}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PvponlineItemSnapped">
+        <Grid Width="220" Height="95">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+          <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Margin="0, 0, 10, 0" Style="{StaticResource ItemHeaderWrapTextSnapped}"
+                     MaxHeight="25" VerticalAlignment="Center" Text="{Binding Title, Converter={StaticResource TextPlainConverter}, ConverterParameter=140}" />
+          <Image Grid.Row="1" Grid.Column="0" Margin="0, 8" Source="{Binding ImageUrl, Converter={StaticResource ThumbnailConverter}, ConverterParameter=220}"
+                 MaxHeight="50" Stretch="UniformToFill" VerticalAlignment="Top" />
+          <TextBlock Grid.Row="1" Grid.Column="1" Margin="16, 8, 20, 10" Style="{StaticResource ItemSubheaderTextSnapped}"
+                     MaxHeight="50" VerticalAlignment="Top" Text="{Binding Summary, Converter={StaticResource TextPlainConverter}, ConverterParameter=280}" />
+        </Grid>
+    </DataTemplate>
+
+
+    <!-- InstancePhotoDescription -->
+    <DataTemplate x:Key="Pvponline1DetailDetail">     
+        <Grid Margin="12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.ColumnSpan="2" Style="{StaticResource HeaderText}" Text="{Binding Title, Converter={StaticResource TextPlainConverter}, ConverterParameter = 140}" />
+            <Button Grid.Row="1" Margin="0,24,0,12" Width="480" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource ImageButtonStyle}" Command="{Binding Source={StaticResource ActionCommands}, Path=ShowImage}" CommandParameter="{Binding ImageUrl}">
+                <Button.Background>
+                    <ImageBrush ImageSource="{Binding ImageUrl, Converter={StaticResource ThumbnailConverter}, ConverterParameter=300}" Stretch="UniformToFill" />
+                </Button.Background>
+            </Button>
+
+              <ScrollViewer  Grid.Row="1" Grid.Column="1" Margin="24" Grid.RowSpan="2" VerticalScrollBarVisibility="Auto">
+                <RichTextBlock Style="{StaticResource Html2XamlStyle}" html2xaml:Properties.Html="{Binding Content}" />
+             </ScrollViewer>
+        </Grid>     
+  </DataTemplate>
+
+    <DataTemplate x:Key="Pvponline1DetailDetailSnapped">
+      <Grid Width="230">
+        <StackPanel>
+          <TextBlock  Margin="0,0,0,30" Style="{StaticResource HeaderText}" Text="{Binding Title, Converter={StaticResource TextPlainConverter}, ConverterParameter = 140}" />
+          <Image Margin="0" Source="{Binding ImageUrl, Converter={StaticResource ThumbnailConverter}, ConverterParameter=250}" MaxHeight="250" VerticalAlignment="Top" Stretch="UniformToFill" />
+
+          <ScrollViewer Width="210" Height="300"  Margin="0, 20"  VerticalScrollBarVisibility="Auto">
+            <RichTextBlock Style="{StaticResource Html2XamlStyle}" html2xaml:Properties.Html="{Binding Content}" />
+          </ScrollViewer>
+        </StackPanel>
+      </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

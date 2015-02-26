@@ -1,0 +1,29 @@
+<SettingsFlyout
+    x:Class="AppStudio.Views.AboutFlyout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:AppStudio.Controls"
+    IconSource="Assets/SmallLogo.png"
+    mc:Ignorable="d"
+    d:DesignWidth="346"
+    Title="About">
+
+    <!-- This StackPanel acts as a root panel for vertical layout of the content sections -->
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+
+        <TextBlock FontSize="18" Margin="0,0,0,20">
+                <Run Text="App version:"/>
+                <Run Text="{Binding AboutThisAppModel.AppVersion}" />
+        </TextBlock>
+        <TextBlock FontSize="18" Margin="0,0,0,20">
+                <Run Text="Developed by:" />
+                <Run Text="{Binding AboutThisAppModel.Publisher}"/>
+        </TextBlock>
+
+        <controls:WebControl Grid.Row="1" Padding="20" Margin="0,0,0,25" Foreground="Black" Width="266" Height="400"
+                             Html="{Binding AboutThisAppModel.AboutText}"/>
+
+    </StackPanel>
+</SettingsFlyout>

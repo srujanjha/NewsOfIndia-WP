@@ -1,0 +1,41 @@
+<Page
+    x:Class="AppStudio.Views.AboutThisAppPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppStudio.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:AppStudio.Controls"
+    mc:Ignorable="d"  Background="{StaticResource AppBackground}">
+
+    <Grid>
+
+        <Hub HeaderTemplate="{StaticResource PageHeader}">
+            <HubSection Header="about" Width="400" HeaderTemplate="{StaticResource HubHeader}">
+                <HubSection.ContentTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <controls:WebControl Grid.Row="0" Margin="12,20" Width="350" Height="300" VerticalAlignment="Top" Html="{Binding AboutModel.AboutText}"/>
+
+                            <TextBlock Grid.Row="1" Margin="12,24,12,0" FontSize="18">
+                                    <Run Text="App version:"/>
+                                    <Run Text="{Binding AboutModel.AppVersion}" />
+                            </TextBlock>
+                            <TextBlock Grid.Row="2" Margin="12,0,12,12" FontSize="18">
+                                    <Run Text="Developed by:" />
+                                    <Run Text="{Binding AboutModel.Publisher}"/>
+                            </TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </HubSection.ContentTemplate>
+            </HubSection>
+        </Hub>
+    </Grid>
+</Page>
